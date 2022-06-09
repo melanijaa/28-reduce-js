@@ -26,6 +26,13 @@ function App() {
     dispachColor(action);
   }
 
+  const goChange = () => {
+    const action = {
+      type: 'change_color_to'
+    }
+    dispachColor(action);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -33,6 +40,7 @@ function App() {
         <button onClick={goPink}>Go pink</button>
         <button onClick={goYellow}>Go Yellow</button>
         <button onClick={goColor}>Change color</button>
+        <button onClick={goChange}>Change</button>
       </header>
     </div>
   );

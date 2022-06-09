@@ -9,7 +9,7 @@ function colorReducer(state, action) {
           newState = 'yellow';
           break;
       case 'change_color':
-          newState = state === 'yellow' ? 'pink' : 'yellow';
+          newState = state === 'purple' ? 'green' : 'purple';
           break;
       case 'change_color_to':
           newState = action.payload;
