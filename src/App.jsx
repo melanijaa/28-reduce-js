@@ -12,6 +12,7 @@ function App() {
   const [textInput, setTextInput] = useState('');
   const [h2, setH2] = useState('');
   const [kv, dispachKv] = useReducer(kvReducer, []);
+  const [colorInput2, setColorInput2] = useState('#F8ff00');
 
   const goPink = () => {
     const action = {
@@ -66,7 +67,7 @@ function App() {
   const goChangeToThis = () => {
     const action = {
       type: 'change_color_to',
-      payload: colorInput
+      payload: colorInput2
     }
     dispachColor(action);
   }
@@ -107,10 +108,13 @@ function App() {
         <button onClick={goText}>Go Text</button>
         <button onClick={goKv}>Go []</button>
         <div className="kvc">
-                {
-                    kv.map((_, i) => <div className="kv" key={i}></div>)
-                }
-            </div>
+          {
+            kv.map((_, i) => <div className="kv" key={i}></div>)
+          }
+        </div>
+        <h2 style={{backgroundColor: color}}>Welcome to Reducer</h2>
+        <input type="color" value={colorInput} onChange={e => setColorInput2(e.target.value)}></input>
+        <button onClick={goChangeToThis}>h2 go change to this color</button>
       </header>
     </div>
   );
