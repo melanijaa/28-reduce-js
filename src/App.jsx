@@ -25,7 +25,7 @@ function App() {
                 <h1>BOOKS REDUCER</h1>
                 <div>
                     {
-                       books.length ? books.map(b => <div key={b.id}>{b.title}</div>) : <h2>Loading...</h2>
+                       books.length ? books.map(b => <div key={b.id}>{b.title}<i> {b.price} Eur</i></div>) : <h2>Loading...</h2>
                     }
                 </div>
             </header>
