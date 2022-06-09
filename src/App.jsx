@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import { useReducer, useState } from 'react';
 import './App.css';
 import rand from './Functions/rand';
 import colorReducer from './Reducers/colorReducer';
@@ -7,6 +7,7 @@ import numberReducer from './Reducers/numberReducer';
 function App() {
   const [color, dispachColor] = useReducer(colorReducer, 'yellow');
   const [numb, dispachNumb] = useReducer(numberReducer, '0000');
+  const [colorInput, setColorInput] = useState('#F8dd00')
 
   const goPink = () => {
     const action = {
@@ -25,13 +26,6 @@ function App() {
   const goColor = () => {
     const action = {
       type: 'change_color'
-    }
-    dispachColor(action);
-  }
-
-  const goChange = () => {
-    const action = {
-      type: 'change_color_to'
     }
     dispachColor(action);
   }
@@ -57,6 +51,14 @@ function App() {
   }, [])
   */
 
+  const goChangeTo = () => {
+    const action = {
+      type: 'change_color_to',
+      payload: colorInput
+    }
+    dispachColor(action);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -66,9 +68,10 @@ function App() {
         <button onClick={goPink}>Go pink</button>
         <button onClick={goYellow}>Go Yellow</button>
         <button onClick={goColor}>Change color</button>
-        <button onClick={goChange}>Change</button>
         <button onClick={number1}>Go 1</button>
         <button onClick={number2}>Go 2</button>
+        <input type="color" value={colorInput} onChange={e => setColorInput(e.target.value)}></input>
+        <button onClick={goChangeTo}>Go change to this color</button>
       </header>
     </div>
   );
