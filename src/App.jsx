@@ -1,11 +1,13 @@
-import { useReducer } from 'react';
+import { useReducer, useState, useEffect, useRef } from 'react';
 import './App.css';
 import listReducer from './Reducers/listReducer';
-
 
 function App() {
 
     const [list, listDispach] = useReducer(listReducer, []);
+    const [number, setNumber] = useState('');
+    const [range, setRange] = useState('0');
+    const doRange = useRef(true);
 
     const newList = () => {
         const action = {
@@ -56,6 +58,37 @@ function App() {
         listDispach(action);
     }
 
+    const bla = n => {
+        const action = {
+            type: 'hide',
+            payload: n
+        }
+        listDispach(action);
+    }
+
+    const hideNumber = () => {
+        const action = {
+            type: 'hide',
+            payload: number
+        }
+        setNumber('');
+        listDispach(action);
+    }
+
+    useEffect(() => {
+        if (!doRange.current) {
+            return;
+        }
+        doRange.current = false;
+        setTimeout(() => doRange.current = true, 20);
+
+        const action = {
+            type: 'range',
+            payload: range.padStart(4, 0)
+        }
+        listDispach(action);
+    }, [range])
+
     return (
         <div className="App">
             <header className="App-header">
@@ -70,8 +103,16 @@ function App() {
                 <button onClick={add}>Add to List</button>
                 </div>
                 <div className="kvc">
+                    <input onChange={e => setNumber(e.target.value)} value={number}></input>
+                    <button onClick={hideNumber}>Hide it!</button>
+                </div>
+                <div className="kvc">
+                    <h2>{range.padStart(4, 0)}</h2>
+                    <input type="range" min="0" max="9999" onChange={e => setRange(e.target.value)} value={range}></input>
+                </div>
+                <div className="kvc">
                     {
-                        list.map((o, i) => o.show ? <div key={i} className="kv" style={{backgroundColor:o.color}}><i>{o.number}</i></div> : null)
+                        list.map((o, i) => o.show ? <div key={i} className="kv" onClick={() => bla(o.number)} style={{backgroundColor:o.color}}><i>{o.number}</i></div> : null)
                     }
                 </div>
 

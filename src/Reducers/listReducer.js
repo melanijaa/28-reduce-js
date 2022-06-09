@@ -35,6 +35,14 @@ function listReducer(state, action) {
     case "freset":
         newState = state.map(o => ({...o, show: true}) )
       break;
+    case "hide":
+      
+        newState = state.map(o => o.number === action.payload ? {...o, show: false} : {...o} )
+      break;
+      case "range":
+        console.log('go', action.payload)
+        newState = state.map(o => o.number > action.payload ? {...o, show: true} : {...o, show: false} )
+      break;
     case 'add': 
         newState = [...state, {
             number: ("" + rand(0, 9999)).padStart(4, 0),
