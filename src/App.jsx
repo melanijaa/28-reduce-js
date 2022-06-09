@@ -19,13 +19,31 @@ function App() {
         })
     }, []);
 
+    const sortAZ = () => {
+        const action = {
+            type: 'sortAZ'
+        }
+        dispachBooks(action);
+    }
+    const sortDEF = () => {
+        const action = {
+            type: 'sortDEF'
+        }
+        dispachBooks(action);
+    }
+
     return (
         <div className="App">
             <header className="App-header">
                 <h1>BOOKS REDUCER</h1>
+                <div className="kvc">
+                    <button onClick={sortAZ}>Sort AZ</button>
+                    <button onClick={sortDEF}>Reset Sort</button>
+                </div>
+
                 <div>
                     {
-                       books.length ? books.map(b => <div key={b.id}>{b.title}<i> {b.price} Eur</i></div>) : <h2>Loading...</h2>
+                       books.length ? books.map(b => <div key={b.id}>{b.title} <i>{b.price} EUR</i></div>) : <h2>Loading...</h2>
                     }
                 </div>
             </header>
